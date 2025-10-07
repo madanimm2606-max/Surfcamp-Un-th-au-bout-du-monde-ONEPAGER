@@ -1,61 +1,66 @@
+// Übersetzungen für DE / EN / FR
 const translations = {
   de: {
-    "hero-title": "Surf & Sahara – Dein Traumurlaub in Mirleft",
-    "hero-sub": "Erlebe Wellen, Wüste und Wunder – alles in einem Trip.",
-    "hero-btn": "Jetzt entdecken",
-    "pkg-title": "Unsere Pakete",
-    "pkg1-title": "Surf Camp",
-    "pkg1-desc": "Surfe die besten Wellen Marokkos und entspanne dich am Meer.",
-    "pkg2-title": "Surf + Wüstentrip",
-    "pkg2-desc": "Kombiniere das Surf-Erlebnis mit einer unvergesslichen Wüstenexpedition.",
-    "act-title": "Aktivitäten",
-    "act-desc": "Yoga am Strand, lokale Küche, Märkte und Abenteuer im Atlasgebirge.",
-    "gal-title": "Galerie",
-    "contact-title": "Jetzt anfragen",
-    "contact-desc": "Buche jetzt dein Surf & Sahara Erlebnis oder stelle deine Fragen über das Formular unten.",
-    "map-title": "Unsere Location"
+    hero_title: "Surf & Sahara — Ocean. Sand. Sterne.",
+    hero_sub: "Authentisches Surf-Camp in Mirleft. Wähle 7 Tage Surf oder 10 Tage Surf + Sahara.",
+    hero_cta: "Angebote ansehen",
+    hero_cta2: "Jetzt reservieren",
+    hero_trust: "Kleine Gruppen • Zertifizierte Lehrkräfte • Nachhaltig",
+    offers_title: "Unsere Formeln — Wähle deine Reise",
+    // usw. (kannst du hier erweitern)
   },
   en: {
-    "hero-title": "Surf & Sahara – Your dream vacation in Mirleft",
-    "hero-sub": "Experience waves, desert and wonders – all in one trip.",
-    "hero-btn": "Discover now",
-    "pkg-title": "Our Packages",
-    "pkg1-title": "Surf Camp",
-    "pkg1-desc": "Surf Morocco’s best waves and relax by the sea.",
-    "pkg2-title": "Surf + Desert Trip",
-    "pkg2-desc": "Combine surfing with an unforgettable desert adventure.",
-    "act-title": "Activities",
-    "act-desc": "Beach yoga, local cuisine, markets, and Atlas mountain trips.",
-    "gal-title": "Gallery",
-    "contact-title": "Get in touch",
-    "contact-desc": "Book your Surf & Sahara experience or send us your questions below.",
-    "map-title": "Our Location"
+    hero_title: "Surf & Sahara — Ocean. Sand. Stars.",
+    hero_sub: "Authentic surf camp in Mirleft. Choose 7 days Surf or 10 days Surf + Sahara.",
+    hero_cta: "See offers",
+    hero_cta2: "Book now",
+    hero_trust: "Small groups • Certified coaches • Sustainable",
+    offers_title: "Our packages — choose your trip",
   },
   fr: {
-    "hero-title": "Surf & Sahara – Vos vacances de rêve à Mirleft",
-    "hero-sub": "Vagues, désert et merveilles – tout dans un seul voyage.",
-    "hero-btn": "Découvrir",
-    "pkg-title": "Nos forfaits",
-    "pkg1-title": "Camp de surf",
-    "pkg1-desc": "Surfez sur les meilleures vagues du Maroc et détendez-vous au bord de la mer.",
-    "pkg2-title": "Surf + Excursion dans le désert",
-    "pkg2-desc": "Combinez surf et aventure inoubliable dans le désert.",
-    "act-title": "Activités",
-    "act-desc": "Yoga sur la plage, cuisine locale, marchés et montagnes de l’Atlas.",
-    "gal-title": "Galerie",
-    "contact-title": "Contactez-nous",
-    "contact-desc": "Réservez votre expérience Surf & Sahara ou posez vos questions ci-dessous.",
-    "map-title": "Notre emplacement"
+    hero_title: "Surf & Sahara — Océan. Sable. Étoiles.",
+    hero_sub: "Camp de surf authentique à Mirleft. Choisissez 7 jours Surf ou 10 jours Surf + Sahara.",
+    hero_cta: "Voir les offres",
+    hero_cta2: "Réserver maintenant",
+    hero_trust: "Petits groupes • Instructeurs certifiés • Durable",
+    offers_title: "Nos formules — Choisissez votre voyage",
   }
 };
 
-const switcher = document.getElementById("langSwitcher");
-switcher.addEventListener("change", () => {
-  const lang = switcher.value;
-  document.querySelectorAll("[data-lang]").forEach(el => {
-    const key = el.dataset.lang;
-    el.textContent = translations[lang][key];
+// Sprache setzen
+function setLang(lang) {
+  const elements = document.querySelectorAll("[data-i18n]");
+  elements.forEach((el) => {
+    const key = el.getAttribute("data-i18n");
+    if (translations[lang] && translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
   });
-});
 
-document.getElementById("year").textContent = new Date().getFullYear();
+  // HTML-Attribut setzen (wichtig für SEO)
+  document.documentElement.lang = lang;
+
+  // Buttons im Header markieren
+  document.querySelectorAll(".lang-switch button").forEach((b) => {
+    b.classList.toggle("active", b.id === `lang-${lang}`);
+  });
+}
+
+// Nach dem Laden der Seite starten
+document.addEventListener("DOMContentLoaded", () => {
+  // Sprache automatisch nach Browser
+  const browserLang = navigator.language.slice(0, 2);
+  const supported = ["de", "en", "fr"];
+  const defaultLang = supported.includes(browserLang) ? browserLang : "de";
+
+  setLang(defaultLang);
+
+  // Sprachen-Umschalter aktivieren
+  document.getElementById("lang-de").addEventListener("click", () => setLang("de"));
+  document.getElementById("lang-en").addEventListener("click", () => setLang("en"));
+  document.getElementById("lang-fr").addEventListener("click", () => setLang("fr"));
+
+  // Jahr im Footer automatisch setzen
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+});
