@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Surf & Sahara — Mirleft</title>
+  <meta name="description" content="Surf & Sahara Mirleft — Surf-Camp & Sahara-Trip. 7 Tage Surf oder 10 Tage Surf + Wüste. Deutsch • English • Français" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* --- Base / Variables --- */
+    :root{
+      --bg:#fffdf9;
+      --accent:#0b6b5a; /* deep teal */
+      --accent-2:#cfa76a; /* gold */
+      --muted:#6b6b6b;
+      --radius:12px;
+      --wrap:1200px;
+      --maxwidth:1100px;
+      --gap:18px;
+      --glass: rgba(255,255,255,0.6);
+    }
+
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:#111;background:var(--bg);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+    a{color:var(--accent);text-decoration:none}
+
+    /* Header */
+    header.site-header{position:fixed;left:0;right:0;top:0;z-index:50;padding:14px 0;background:transparent}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:48px;height:48px;border-radius:8px;object-fit:cover}
+    nav.nav{display:flex;gap:14px;align-items:center}
+    nav.nav a{padding:8px 10px;border-radius:8px;font-weight:600;color:#083e35}
+    .btn-ghost{border:1px solid rgba(8,62,53,.12);padding:8px 12px;border-radius:8px;background:transparent}
+    .nav-toggle{display:none}
+
+    /* Hero */
+    .hero{min-height:78vh;display:flex;align-items:center;position:relative;padding-top:72px}
+    .hero-bg{position:absolute;inset:0;background-image:url('assets/hero.jpg');background-size:cover;background-position:center;filter:contrast(.95) saturate(.95);z-index:0}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(3,46,40,.35), rgba(3,46,40,.15));z-index:1}
+    .hero-content{position:relative;z-index:10;padding:48px 20px;color:#fff;max-width:980px}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,52px);margin:0 0 12px}
+    .lead{font-size:18px;margin:8px 0 18px}
+    .hero-ctas{display:flex;gap:12px}
+    .btn-primary{background:var(--accent);color:#fff;padding:12px 18px;border-radius:10px;font-weight:700}
+    .btn-light{background:rgba(255,255,255,.95);color:#083e35;padding:10px 16px;border-radius:10px;font-weight:600}
+
+    /* Sections */
+    section{padding:56px 0}
+    .section-title{font-size:20px;color:var(--accent);margin-bottom:12px}
+
+    /* packages */
+    .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .card{background:linear-gradient(180deg,#ffffff, #fffaf6);padding:18px;border-radius:14px;box-shadow:0 10px 30px rgba(8,20,18,.06);overflow:hidden}
+    .card img{width:100%;height:200px;object-fit:cover;border-radius:10px}
+    .card h3{margin:12px 0 6px}
+    .card-sub{color:var(--muted);font-size:14px;margin-bottom:8px}
+    .features{list-style:none;padding:0;margin:0 0 12px}
+    .features li{padding:6px 0;border-top:1px dashed #eee;font-size:15px}
+    .card-cta{display:flex;align-items:center;gap:12px;justify-content:space-between}
+
+    /* activities */
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .activity{background:#fff;padding:16px;border-radius:10px;text-align:center}
+
+    /* gallery */
+    .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .gallery-grid img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+
+    /* reserve */
+    .reserve-grid{display:grid;grid-template-columns:1fr 420px;gap:20px}
+    .tally-embed{background:#fff;padding:10px;border-radius:10px;box-shadow:0 8px 20px rgba(10,20,20,.06)}
+
+    /* footer */
+    footer.site-footer{background:#f8f6f2;padding:28px 0;margin-top:30px}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px}
+
+    /* language switcher */
+    .lang-switch{display:flex;gap:8px;align-items:center}
+    .lang-switch button{background:transparent;border:0;padding:6px 8px;border-radius:8px;font-weight:600;cursor:pointer}
+    .lang-switch button.active{background:var(--accent);color:#fff}
+
+    /* responsive */
+    @media (max-width:980px){
+      .cards{grid-template-columns:1fr}
+      .grid-4{grid-template-columns:repeat(2,1fr)}
+      .gallery-grid{grid-template-columns:repeat(2,1fr)}
+      .reserve-grid{grid-template-columns:1fr}
+      nav.nav{display:none}
+      .nav-toggle{display:block}
+    }
+
+    @media (max-width:620px){
+      .hero h1{font-size:28px}
+      .card img{height:160px}
+      .gallery-grid img{height:120px}
+    }
+
+    /* small polish */
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+    .center{text-align:center}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <img src="assets/logo-placeholder.png" alt="Surf & Sahara Logo" class="logo">
+        <div>
+          <div style="font-weight:700;color:#083e35">Surf & Sahara</div>
+          <div class="small muted">Mirleft • Morocco</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#angebote" data-i18n="nav_offers">Angebote</a>
+        <a href="#ablauf" data-i18n="nav_info">Ablauf</a>
+        <a href="#gallery" data-i18n="nav_gallery">Galerie</a>
+        <a href="#reservierung" class="btn-ghost" data-i18n="nav_book">Reservieren</a>
+      </nav>
+
+      <div class="lang-switch" aria-label="language switch">
+        <button id="lang-de" class="active">DE</button>
+        <button id="lang-en">EN</button>
+        <button id="lang-fr">FR</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bg" role="img" aria-label="Surfer in Mirleft"></div>
+      <div class="hero-overlay"></div>
+      <div class="wrap hero-content">
+        <h1 data-i18n="hero_title">Surf & Sahara — Ocean. Sand. Sterne.</h1>
+        <p class="lead" data-i18n="hero_sub">Authentisches Surf-Camp in Mirleft. Wähle 7 Tage Surf oder 10 Tage Surf + Sahara.</p>
+        <div class="hero-ctas">
+          <a href="#angebote" class="btn-primary" data-i18n="hero_cta">Angebote ansehen</a>
+          <a href="#reservierung" class="btn-light" data-i18n="hero_cta2">Jetzt reservieren</a>
+        </div>
+        <p class="muted"> <span data-i18n="hero_trust">Kleine Gruppen • Zertifizierte Lehrkräfte • Nachhaltig</span></p>
+      </div>
+    </section>
+
+    <section id="angebote" class="wrap section">
+      <h2 class="section-title" data-i18n="offers_title">Unsere Formeln — Wähle deine Reise</h2>
+
+      <div class="cards">
+        <article class="card">
+          <img src="assets/pkg1.jpg" alt="7 Tage Surf" loading="lazy">
+          <h3 data-i18n="pkg1_title">7 Tage – Surf Camp</h3>
+          <p class="card-sub" data-i18n="pkg1_sub">Perfekt für Anfänger & Fortgeschrittene</p>
+          <ul class="features">
+            <li data-i18n="pkg1_f1">6 Tage Surf-Sessions (Morgens & Nachmittags)</li>
+            <li data-i18n="pkg1_f2">Zertifizierte Surflehrer, max. 8 Personen/Lehrer</li>
+            <li data-i18n="pkg1_f3">Unterkunft in Zimmern mit Meerblick</li>
+            <li data-i18n="pkg1_f4">Authentische marokkanische Vollpension</li>
+            <li data-i18n="pkg1_f5">Yoga am Strand & Pool</li>
+          </ul>
+          <div class="card-cta">
+            <a href="#reservierung" class="btn-primary" data-i18n="pkg1_cta">Mehr erfahren & reservieren</a>
+            <span class="muted" data-i18n="pkg_price">Preis auf Anfrage</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="assets/pkg2.jpg" alt="10 Tage Surf + Sahara" loading="lazy">
+          <h3 data-i18n="pkg2_title">10 Tage – Surf & Sahara</h3>
+          <p class="card-sub" data-i18n="pkg2_sub">Surf & magische Wüste</p>
+          <ul class="features">
+            <li data-i18n="pkg2_f1">8 Tage Surf in Mirleft</li>
+            <li data-i18n="pkg2_f2">2 Tage Wüsten-Trip: Dromedarexkursion & Bivouac</li>
+            <li data-i18n="pkg2_f3">Geführte Dünen-Tour & lokale Kultur</li>
+            <li data-i18n="pkg2_f4">Alle Transfers & Verpflegung inklusive</li>
+            <li data-i18n="pkg2_f5">Kleine Gruppen • Nachhaltig</li>
+          </ul>
+          <div class="card-cta">
+            <a href="#reservierung" class="btn-primary" data-i18n="pkg2_cta">Mehr erfahren & reservieren</a>
+            <span class="muted" data-i18n="pkg_price">Preis auf Anfrage</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="ablauf" class="wrap section">
+      <h2 class="section-title" data-i18n="info_title">Ablauf & Leistungen</h2>
+      <div class="grid-4">
+        <div class="activity">
+          <h4 data-i18n="act_surf">Surfen</h4>
+          <p data-i18n="act_surf_p">Individuelle Sessions & Videofeedback</p>
+        </div>
+        <div class="activity">
+          <h4 data-i18n="act_yoga">Yoga</h4>
+          <p data-i18n="act_yoga_p">Sunset Yoga & Mobility</p>
+        </div>
+        <div class="activity">
+          <h4 data-i18n="act_food">Kulinarik</h4>
+          <p data-i18n="act_food_p">Regionale Küche, frisch & saisonal</p>
+        </div>
+        <div class="activity">
+          <h4 data-i18n="act_desert">Desert Trip</h4>
+          <p data-i18n="act_desert_p">Kamelritt & Nacht unter Sternen</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="wrap section">
+      <h2 class="section-title" data-i18n="gallery_title">Galerie</h2>
+      <div class="gallery-grid">
+        <img src="assets/gallery1.jpg" alt="Surfen" loading="lazy">
+        <img src="assets/gallery2.jpg" alt="Strand" loading="lazy">
+        <img src="assets/gallery3.jpg" alt="Wüste" loading="lazy">
+        <img src="assets/gallery4.jpg" alt="Camp" loading="lazy">
+      </div>
+    </section>
+
+    <section id="location" class="wrap section">
+      <h2 class="section-title" data-i18n="location_title">Lage</h2>
+      <p class="muted" data-i18n="location_sub">Wir befinden uns in Mirleft — die perfekte Kombination aus atlantischer Brandung und weitem Wüstensand.</p>
+      <div style="margin-top:16px;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(10,20,20,.06)">
+        <iframe width="100%" height="420" frameborder="0" style="border:0" src="https://www.google.com/maps?q=Mirleft+Morocco&output=embed" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <section id="reservierung" class="wrap section">
+      <h2 class="section-title" data-i18n="reserve_title">Reservierung & Anfrage</h2>
+      <p class="lead" data-i18n="reserve_sub">Fülle das kurze Formular aus und wir melden uns innerhalb von 48 Stunden.</p>
+      <div class="reserve-grid">
+        <div>
+          <ul class="features">
+            <li data-i18n="reserve_f1">Wähle Paket & gewünschte Daten</li>
+            <li data-i18n="reserve_f2">Teile uns Niveau & Wünsche mit</li>
+            <li data-i18n="reserve_f3">Flexible Zahlungs- & Stornobedingungen</li>
+          </ul>
+          <p class="muted"> <span data-i18n="reserve_contact">Fragen? Mail: </span><a href="mailto:hello@surfandsahara.example">hello@surfandsahara.example</a></p>
+        </div>
+        <div class="tally-embed">
+          <!-- Tally iframe: ERSETZE REPLACE_WITH_TALLY_LINK -->
+          <iframe src="https://tally.so/embed/REPLACE_WITH_TALLY_LINK" width="100%" height="650" frameborder="0" title="Reservierung" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="wrap section">
+      <h2 class="section-title" data-i18n="faq_title">FAQ</h2>
+      <div>
+        <details><summary data-i18n="faq_q1">Wie komme ich hin?</summary>
+          <p data-i18n="faq_a1">Transfer vom Flughafen Agadir oder Guelmim kann organisiert werden (Aufpreis möglich).</p>
+        </details>
+        <details><summary data-i18n="faq_q2">Welche Vorkenntnisse brauche ich?</summary>
+          <p data-i18n="faq_a2">Keine – wir teilen nach Level ein.</p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <strong>Surf & Sahara — Mirleft</strong><br>
+        <a href="mailto:hello@surfandsahara.example">hello@surfandsahara.example</a>
+      </div>
+      <div class="muted small">Impressum & Datenschutz vor Launch ergänzen • © <span id="year"></span></div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple i18n content object
+    const translations = {
+      de: {
+        nav_offers: 'Angebote', nav_info:'Ablauf', nav_gallery:'Galerie', nav_book:'Reservieren',
+        hero_title:'Surf & Sahara — Ocean. Sand. Sterne.', hero_sub:'Authentisches Surf-Camp in Mirleft. Wähle 7 Tage Surf oder 10 Tage Surf + Sahara.', hero_cta:'Angebote ansehen', hero_cta2:'Jetzt reservieren', hero_trust:'Kleine Gruppen • Zertifizierte Lehrkräfte • Nachhaltig',
+        offers_title:'Unsere Formeln — Wähle deine Reise', pkg1_title:'7 Tage – Surf Camp', pkg1_sub:'Perfekt für Anfänger & Fortgeschrittene', pkg1_f1:'6 Tage Surf-Sessions (Morgens & Nachmittags)', pkg1_f2:'Zertifizierte Surflehrer, max. 8 Personen/Lehrer', pkg1_f3:'Unterkunft in Zimmern mit Meerblick', pkg1_f4:'Authentische marokkanische Vollpension', pkg1_f5:'Yoga am Strand & Pool', pkg1_cta:'Mehr erfahren & reservieren', pkg_price:'Preis auf Anfrage',
+        pkg2_title:'10 Tage – Surf & Sahara', pkg2_sub:'Surf & magische Wüste', pkg2_f1:'8 Tage Surf in Mirleft', pkg2_f2:'2 Tage Wüsten-Trip: Dromedarexkursion & Bivouac', pkg2_f3:'Geführte Dünen-Tour & lokale Kultur', pkg2_f4:'Alle Transfers & Verpflegung inklusive', pkg2_f5:'Kleine Gruppen • Nachhaltig', pkg2_cta:'Mehr erfahren & reservieren',
+        info_title:'Ablauf & Leistungen', act_surf:'Surfen', act_surf_p:'Individuelle Sessions & Videofeedback', act_yoga:'Yoga', act_yoga_p:'Sunset Yoga & Mobility', act_food:'Kulinarik', act_food_p:'Regionale Küche, frisch & saisonal', act_desert:'Desert Trip', act_desert_p:'Kamelritt & Nacht unter Sternen',
+        gallery_title:'Galerie', location_title:'Lage', location_sub:'Wir befinden uns in Mirleft — die perfekte Kombination aus atlantischer Brandung und weitem Wüstensand.',
+        reserve_title:'Reservierung & Anfrage', reserve_sub:'Fülle das kurze Formular aus und wir melden uns innerhalb von 48 Stunden.', reserve_f1:'Wähle Paket & gewünschte Daten', reserve_f2:'Teile uns Niveau & Wünsche mit', reserve_f3:'Flexible Zahlungs- & Stornobedingungen', reserve_contact:'Fragen? Mail:', faq_title:'FAQ', faq_q1:'Wie komme ich hin?', faq_a1:'Transfer vom Flughafen Agadir oder Guelmim kann organisiert werden (Aufpreis möglich).', faq_q2:'Welche Vorkenntnisse brauche ich?', faq_a2:'Keine – wir teilen nach Level ein.'
+      },
+      en: {
+        nav_offers: 'Offers', nav_info:'Info', nav_gallery:'Gallery', nav_book:'Book',
+        hero_title:'Surf & Sahara — Ocean. Sand. Stars.', hero_sub:'Authentic surf camp in Mirleft. Choose 7 days Surf or 10 days Surf + Sahara.', hero_cta:'See offers', hero_cta2:'Book now', hero_trust:'Small groups • Certified coaches • Sustainable',
+        offers_title:'Our packages — choose your trip', pkg1_title:'7 days – Surf Camp', pkg1_sub:'Perfect for beginners & advanced', pkg1_f1:'6 days of surf sessions (morning & afternoon)', pkg1_f2:'Certified coaches, max. 8 students/coach', pkg1_f3:'Rooms with sea view', pkg1_f4:'Authentic Moroccan full board', pkg1_f5:'Beach yoga & pool', pkg1_cta:'Learn more & book', pkg_price:'Price on request',
+        pkg2_title:'10 days – Surf & Sahara', pkg2_sub:'Surf & magical desert', pkg2_f1:'8 days surf in Mirleft', pkg2_f2:'2 days desert trip: camel excursion & bivouac', pkg2_f3:'Dune tour & local culture', pkg2_f4:'All transfers & meals included', pkg2_f5:'Small groups • Sustainable', pkg2_cta:'Learn more & book',
+        info_title:'Schedule & Services', act_surf:'Surfing', act_surf_p:'Personalized sessions & video feedback', act_yoga:'Yoga', act_yoga_p:'Sunset yoga & mobility', act_food:'Food', act_food_p:'Local cuisine, fresh & seasonal', act_desert:'Desert Trip', act_desert_p:'Camel ride & night under stars',
+        gallery_title:'Gallery', location_title:'Location', location_sub:'We are located in Mirleft — the perfect mix of Atlantic waves and desert sand.',
+        reserve_title:'Booking & Inquiry', reserve_sub:'Fill the short form and we will contact you within 48 hours.', reserve_f1:'Choose package & dates', reserve_f2:'Tell us your level & wishes', reserve_f3:'Flexible payment & cancellation', reserve_contact:'Questions? Mail:', faq_title:'FAQ', faq_q1:'How to get here?', faq_a1:'Transfers from Agadir or Guelmim airport can be arranged (extra charge).', faq_q2:'What level do I need?', faq_a2:'None – we group by level.'
+      },
+      fr: {
+        nav_offers: 'Offres', nav_info:'Info', nav_gallery:'Galerie', nav_book:'Réserver',
+        hero_title:'Surf & Sahara — Océan. Sable. Étoiles.', hero_sub:'Camp de surf authentique à Mirleft. Choisissez 7 jours Surf ou 10 jours Surf + Sahara.', hero_cta:'Voir les offres', hero_cta2:'Réserver maintenant', hero_trust:'Petits groupes • Instructeurs certifiés • Durable',
+        offers_title:'Nos formules — Choisissez votre voyage', pkg1_title:'7 jours – Surf Camp', pkg1_sub:'Parfait pour débutants & confirmés', pkg1_f1:'6 jours de sessions (matin & après-midi)', pkg1_f2:'Instructeurs certifiés, max. 8 personnes/instructeur', pkg1_f3:'Chambres avec vue mer', pkg1_f4:'Pension complète marocaine authentique', pkg1_f5:'Yoga sur la plage & piscine', pkg1_cta:'En savoir plus & réserver', pkg_price:'Prix sur demande',
+        pkg2_title:'10 jours – Surf & Sahara', pkg2_sub:'Surf & désert magique', pkg2_f1:'8 jours de surf à Mirleft', pkg2_f2:'2 jours de désert: excursion à dos de chameau & bivouac', pkg2_f3:'Excursion dans les dunes & culture locale', pkg2_f4:'Tous transferts & repas inclus', pkg2_f5:'Petits groupes • Durable', pkg2_cta:'En savoir plus & réserver',
+        info_title:'Déroulé & Services', act_surf:'Surf', act_surf_p:'Sessions personnalisées & feedback vidéo', act_yoga:'Yoga', act_yoga_p:'Yoga au coucher du soleil & mobilité', act_food:'Cuisine', act_food_p:'Cuisine locale, fraîche & de saison', act_desert:'Excursion Désert', act_desert_p:'Balade à dos de chameau & nuit sous étoiles',
+        gallery_title:'Galerie', location_title:'Emplacement', location_sub:'Nous sommes situés à Mirleft — le parfait mélange entre vagues atlantiques et dunes de sable.',
+        reserve_title:'Réservation & Demande', reserve_sub:'Remplissez le court formulaire et nous vous contacterons sous 48 heures.', reserve_f1:'Choisissez la formule & les dates', reserve_f2:'Indiquez votre niveau & vos souhaits', reserve_f3:'Paiement & annulation flexibles', reserve_contact:'Questions? Mail:', faq_title:'FAQ', faq_q1:'Comment venir?', faq_a1:'Transferts depuis Agadir ou Guelmim peuvent être organisés (supplément).', faq_q2:'Quel niveau est requis?', faq_a2:'Aucun – nous groupons par niveau.'
+      }
+    };
+
+    // Apply translations
+    function setLang(lang){
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        if(translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
+      });
+      // set html lang
+      document.documentElement.lang = (lang==='de'?'de':(lang==='en'?'en':'fr'));
+      // active button
+      document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.remove('active'));
+      document.getElementById('lang-'+(lang==='de'?'de':(lang==='en'?'en':'fr'))).classList.add('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // default language: German
+      setLang('de');
+
+      document.getElementById('lang-de').addEventListener('click', ()=>setLang('de'));
+      document.getElementById('lang-en').addEventListener('click', ()=>setLang('en'));
+      document.getElementById('lang-fr').addEventListener('click', ()=>setLang('fr'));
+
+      // year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // simple accessibility: focus skip
+      const skip = document.createElement('a');
+      skip.href = '#main';
+      skip.className = 'skip';
+      skip.textContent = 'Skip to content';
+      document.body.prepend(skip);
+    });
+  </script>
+</body>
+</html>
